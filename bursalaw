@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bursa Hukuk Bürosu | bursalaw.com</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bordo: #7B2D3E;
+    --bordo-koyu: #5A1E2C;
+    --bordo-acik: #C4717F;
+    --bordo-pastel: #F5E8EB;
+    --krem: #F8F4F0;
+    --krem2: #EDE8E2;
+    --altin: #B8975A;
+    --altin-acik: #D4B57A;
+    --metin: #2C2420;
+    --metin-ikincil: #6B5B55;
+    --beyaz: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    color: var(--metin);
+    background: var(--krem);
+    font-size: 16px;
+    line-height: 1.8;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(248, 244, 240, 0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--krem2);
+    padding: 0 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    color: var(--bordo-koyu);
+    letter-spacing: 0.08em;
+    text-decoration: none;
+  }
+
+  .nav-logo span {
+    color: var(--altin);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--metin-ikincil);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--bordo); }
+
+  .nav-cta {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--beyaz);
+    background: var(--bordo);
+    padding: 10px 24px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .nav-cta:hover { background: var(--bordo-koyu); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: var(--bordo-koyu);
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 120px 5% 80px;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 45%;
+    height: 100%;
+    background: var(--bordo);
+    clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
+  }
+
+  .hero::after {
+    content: '"';
+    position: absolute;
+    right: 8%;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 400px;
+    color: rgba(255,255,255,0.04);
+    line-height: 1;
+  }
+
+  .hero-icerik {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+  }
+
+  .hero-etiket {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--altin-acik);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .hero-etiket::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--altin);
+  }
+
+  .hero h1 {
+    font-size: clamp(42px, 5vw, 72px);
+    color: var(--beyaz);
+    line-height: 1.15;
+    margin-bottom: 24px;
+  }
+
+  .hero h1 em {
+    color: var(--altin-acik);
+    font-style: italic;
+  }
+
+  .hero p {
+    font-size: 17px;
+    color: rgba(255,255,255,0.65);
+    max-width: 520px;
+    margin-bottom: 48px;
+    line-height: 1.9;
+  }
+
+  .hero-butonlar {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-birincil {
+    background: var(--altin);
+    color: var(--beyaz);
+    padding: 16px 36px;
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .btn-birincil:hover { background: var(--altin-acik); }
+
+  .btn-ikincil {
+    border: 1px solid rgba(255,255,255,0.3);
+    color: rgba(255,255,255,0.75);
+    padding: 16px 36px;
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .btn-ikincil:hover {
+    border-color: rgba(255,255,255,0.6);
+    color: var(--beyaz);
+  }
+
+  .hero-rakamlar {
+    position: absolute;
+    bottom: 60px;
+    right: 5%;
+    z-index: 2;
+    display: flex;
+    gap: 48px;
+  }
+
+  .rakam-blok {
+    text-align: center;
+  }
+
+  .rakam-blok .rakam {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    color: var(--beyaz);
+    line-height: 1;
+  }
+
+  .rakam-blok .rakam span {
+    color: var(--altin-acik);
+  }
+
+  .rakam-blok .label {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    margin-top: 6px;
+  }
+
+  /* AYIRICI */
+  .altin-serit {
+    height: 4px;
+    background: linear-gradient(90deg, var(--bordo), var(--altin), var(--bordo));
+  }
+
+  /* HAKKIMIZDA */
+  .hakkimizda {
+    padding: 100px 5%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .bolum-etiket {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--bordo-acik);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .bolum-etiket::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--bordo-acik);
+  }
+
+  .bolum-baslik {
+    font-size: clamp(30px, 3vw, 48px);
+    color: var(--bordo-koyu);
+    line-height: 1.2;
+    margin-bottom: 24px;
+  }
+
+  .hakkimizda-metin p {
+    color: var(--metin-ikincil);
+    margin-bottom: 20px;
+    font-size: 15px;
+    line-height: 1.9;
+  }
+
+  .altin-cizgi {
+    width: 60px;
+    height: 2px;
+    background: var(--altin);
+    margin: 32px 0;
+  }
+
+  .hakkimizda-kart {
+    background: var(--bordo-pastel);
+    padding: 48px;
+    position: relative;
+  }
+
+  .hakkimizda-kart::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--bordo);
+  }
+
+  .kart-icerik {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    color: var(--bordo-koyu);
+    line-height: 1.6;
+    font-style: italic;
+    margin-bottom: 24px;
+  }
+
+  .kart-alt {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--metin-ikincil);
+  }
+
+  /* HİZMETLER */
+  .hizmetler {
+    background: var(--bordo-koyu);
+    padding: 100px 5%;
+  }
+
+  .hizmetler-baslik-alan {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 64px;
+  }
+
+  .hizmetler .bolum-etiket {
+    justify-content: center;
+  }
+
+  .hizmetler .bolum-etiket::before { display: none; }
+
+  .hizmetler .bolum-baslik {
+    color: var(--beyaz);
+  }
+
+  .hizmetler-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .hizmet-kart {
+    background: rgba(255,255,255,0.04);
+    padding: 40px 36px;
+    border-top: 2px solid transparent;
+    transition: all 0.3s;
+    cursor: default;
+  }
+
+  .hizmet-kart:hover {
+    background: rgba(255,255,255,0.08);
+    border-top-color: var(--altin);
+  }
+
+  .hizmet-no {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    color: rgba(255,255,255,0.08);
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+
+  .hizmet-baslik {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    color: var(--beyaz);
+    margin-bottom: 16px;
+  }
+
+  .hizmet-aciklama {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.8;
+  }
+
+  /* NEDEN BİZ */
+  .neden-biz {
+    padding: 100px 5%;
+    background: var(--krem2);
+  }
+
+  .neden-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 40px;
+    max-width: 1200px;
+    margin: 64px auto 0;
+  }
+
+  .neden-item {
+    text-align: center;
+    padding: 40px 24px;
+    background: var(--beyaz);
+    border-bottom: 3px solid transparent;
+    transition: border-color 0.3s;
+  }
+
+  .neden-item:hover { border-bottom-color: var(--bordo); }
+
+  .neden-ikon {
+    width: 56px;
+    height: 56px;
+    background: var(--bordo-pastel);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 22px;
+  }
+
+  .neden-item h3 {
+    font-size: 20px;
+    color: var(--bordo-koyu);
+    margin-bottom: 12px;
+  }
+
+  .neden-item p {
+    font-size: 14px;
+    color: var(--metin-ikincil);
+    line-height: 1.8;
+  }
+
+  /* İLETİŞİM */
+  .iletisim {
+    padding: 100px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .iletisim-sol .bolum-baslik { margin-bottom: 16px; }
+
+  .iletisim-sol > p {
+    font-size: 15px;
+    color: var(--metin-ikincil);
+    margin-bottom: 40px;
+  }
+
+  .iletisim-bilgi {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .iletisim-satir {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .iletisim-satir .ikon {
+    width: 40px;
+    height: 40px;
+    background: var(--bordo-pastel);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 16px;
+  }
+
+  .iletisim-satir .bilgi-label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--bordo-acik);
+    margin-bottom: 4px;
+  }
+
+  .iletisim-satir .bilgi-deger {
+    font-size: 15px;
+    color: var(--metin);
+  }
+
+  /* FORM */
+  .form-kart {
+    background: var(--beyaz);
+    padding: 48px;
+    border-top: 4px solid var(--bordo);
+  }
+
+  .form-kart h3 {
+    font-size: 28px;
+    color: var(--bordo-koyu);
+    margin-bottom: 32px;
+  }
+
+  .form-grup {
+    margin-bottom: 20px;
+  }
+
+  .form-grup label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--metin-ikincil);
+    margin-bottom: 8px;
+  }
+
+  .form-grup input,
+  .form-grup textarea,
+  .form-grup select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--krem2);
+    background: var(--krem);
+    font-family: 'Jost', sans-serif;
+    font-size: 14px;
+    color: var(--metin);
+    outline: none;
+    transition: border-color 0.2s;
+    appearance: none;
+  }
+
+  .form-grup input:focus,
+  .form-grup textarea:focus,
+  .form-grup select:focus {
+    border-color: var(--bordo);
+  }
+
+  .form-grup textarea { resize: vertical; min-height: 110px; }
+
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .btn-form {
+    width: 100%;
+    background: var(--bordo);
+    color: var(--beyaz);
+    border: none;
+    padding: 16px;
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 8px;
+  }
+
+  .btn-form:hover { background: var(--bordo-koyu); }
+
+  /* FOOTER */
+  footer {
+    background: var(--bordo-koyu);
+    padding: 60px 5% 32px;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .footer-ust {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    margin-bottom: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    color: var(--beyaz);
+    letter-spacing: 0.08em;
+  }
+
+  .footer-logo span { color: var(--altin); }
+
+  .footer-slogan {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    margin-top: 8px;
+    letter-spacing: 0.05em;
+  }
+
+  .footer-linkler {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+
+  .footer-linkler a {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-linkler a:hover { color: var(--altin-acik); }
+
+  .footer-alt {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+  }
+
+  .yasal {
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    color: rgba(255,255,255,0.3);
+  }
+
+  @media (max-width: 768px) {
+    .nav-links, .nav-cta { display: none; }
+    .hero::before { width: 100%; clip-path: none; opacity: 0.3; }
+    .hero-rakamlar { position: static; margin-top: 48px; justify-content: flex-start; }
+    .hakkimizda, .iletisim { grid-template-columns: 1fr; gap: 40px; }
+    .footer-ust { flex-direction: column; }
+    .footer-linkler { flex-wrap: wrap; gap: 20px; }
+    .footer-alt { flex-direction: column; gap: 12px; text-align: center; }
+    .form-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">BURSA<span>LAW</span></a>
+  <ul class="nav-links">
+    <li><a href="#hakkimizda">Hakkımızda</a></li>
+    <li><a href="#hizmetler">Hizmetler</a></li>
+    <li><a href="#iletisim">İletişim</a></li>
+  </ul>
+  <a href="#iletisim" class="nav-cta">Randevu Al</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-icerik">
+    <div class="hero-etiket">Bursa Hukuk Bürosu</div>
+    <h1>Hakkınızı <em>kararlılıkla</em> savunuyoruz.</h1>
+    <p>Yılların deneyimi ve uzmanlığıyla, her türlü hukuki uyuşmazlıkta yanınızdayız. Güçlü, güvenilir ve sonuç odaklı hukuki destek.</p>
+    <div class="hero-butonlar">
+      <a href="#iletisim" class="btn-birincil">Ücretsiz Danışın</a>
+      <a href="#hizmetler" class="btn-ikincil">Hizmetlerimiz</a>
+    </div>
+  </div>
+  <div class="hero-rakamlar">
+    <div class="rakam-blok">
+      <div class="rakam">15<span>+</span></div>
+      <div class="label">Yıl Deneyim</div>
+    </div>
+    <div class="rakam-blok">
+      <div class="rakam">500<span>+</span></div>
+      <div class="label">Başarılı Dava</div>
+    </div>
+    <div class="rakam-blok">
+      <div class="rakam">98<span>%</span></div>
+      <div class="label">Müvekkil Memnuniyeti</div>
+    </div>
+  </div>
+</section>
+
+<div class="altin-serit"></div>
+
+<!-- HAKKIMIZDA -->
+<section id="hakkimizda">
+  <div class="hakkimizda">
+    <div class="hakkimizda-metin">
+      <div class="bolum-etiket">Hakkımızda</div>
+      <h2 class="bolum-baslik">Bursa'nın güvenilir hukuk bürosu</h2>
+      <p>Bursa Hukuk Bürosu olarak, müvekkillerimizin hukuki sorunlarına kalıcı ve etkin çözümler üretmeyi temel ilkemiz olarak benimsiyoruz. İş hukukundan ticaret hukukuna, aile hukukundan icra takiplerine kadar geniş bir alanda uzmanlaşmış avukat kadromuzla hizmet veriyoruz.</p>
+      <p>Her davayı kişisel olarak ele alıyor; müvekkillerimizi sürecin her adımında bilgilendiriyor ve haklarını en üst düzeyde korumak için çalışıyoruz.</p>
+      <div class="altin-cizgi"></div>
+      <p style="font-family:'Cormorant Garamond',serif; font-size:18px; font-style:italic; color:var(--bordo-koyu);">"Adalet, yalnızca bilginin değil; deneyimin ve kararlılığın meyvesidir."</p>
+    </div>
+    <div class="hakkimizda-kart">
+      <div class="kart-icerik">Hukuki süreçler, hayatınızın en kritik anlarında ortaya çıkar. Bu anlarda yanınızda olabilmek en büyük sorumluluğumuzdur.</div>
+      <div class="altin-cizgi"></div>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:8px;height:8px;background:var(--bordo);border-radius:50%;flex-shrink:0;"></div>
+          <span style="font-size:14px;color:var(--metin-ikincil);">Ücretsiz ilk danışmanlık görüşmesi</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:8px;height:8px;background:var(--bordo);border-radius:50%;flex-shrink:0;"></div>
+          <span style="font-size:14px;color:var(--metin-ikincil);">Şeffaf ve net ücretlendirme politikası</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:8px;height:8px;background:var(--bordo);border-radius:50%;flex-shrink:0;"></div>
+          <span style="font-size:14px;color:var(--metin-ikincil);">7/24 ulaşılabilir avukat desteği</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:8px;height:8px;background:var(--bordo);border-radius:50%;flex-shrink:0;"></div>
+          <span style="font-size:14px;color:var(--metin-ikincil);">Dava sürecinde anlık bilgilendirme</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HİZMETLER -->
+<section id="hizmetler" class="hizmetler">
+  <div class="hizmetler-baslik-alan">
+    <div class="bolum-etiket" style="color:var(--altin-acik);">Uzmanlık Alanlarımız</div>
+    <h2 class="bolum-baslik">Hizmetlerimiz</h2>
+    <p style="font-size:14px;color:rgba(255,255,255,0.45);margin-top:16px;">Her hukuki uyuşmazlıkta derinlemesine bilgi ve pratik deneyimi bir araya getiriyoruz.</p>
+  </div>
+  <div class="hizmetler-grid">
+    <div class="hizmet-kart">
+      <div class="hizmet-no">01</div>
+      <h3 class="hizmet-baslik">İş Hukuku</h3>
+      <p class="hizmet-aciklama">İşe iade, kıdem ve ihbar tazminatı, mobbing, iş kazası, toplu iş sözleşmeleri ve işçi-işveren uyuşmazlıklarında kapsamlı hukuki destek.</p>
+    </div>
+    <div class="hizmet-kart">
+      <div class="hizmet-no">02</div>
+      <h3 class="hizmet-baslik">Ticaret Hukuku</h3>
+      <p class="hizmet-aciklama">Şirket kuruluşu ve tasfiyesi, sözleşme hukuku, ticari uyuşmazlıklar, ortaklık anlaşmazlıkları ve ticari alacak takibi.</p>
+    </div>
+    <div class="hizmet-kart">
+      <div class="hizmet-no">03</div>
+      <h3 class="hizmet-baslik">İcra & İflas Hukuku</h3>
+      <p class="hizmet-aciklama">Alacak takibi, itirazın iptali, menfi tespit ve istirdat davaları, haciz işlemleri, iflas ve konkordato süreçleri.</p>
+    </div>
+    <div class="hizmet-kart">
+      <div class="hizmet-no">04</div>
+      <h3 class="hizmet-baslik">Aile Hukuku</h3>
+      <p class="hizmet-aciklama">Boşanma davaları, nafaka ve velayet, mal paylaşımı, miras uyuşmazlıkları ve aile içi hukuki düzenlemeler.</p>
+    </div>
+    <div class="hizmet-kart">
+      <div class="hizmet-no">05</div>
+      <h3 class="hizmet-baslik">Gayrimenkul Hukuku</h3>
+      <p class="hizmet-aciklama">Tapu iptali ve tescil, kira uyuşmazlıkları, kat mülkiyeti, tahliye davaları ve inşaat sözleşme hukuku.</p>
+    </div>
+    <div class="hizmet-kart">
+      <div class="hizmet-no">06</div>
+      <h3 class="hizmet-baslik">Ceza Hukuku</h3>
+      <p class="hizmet-aciklama">Soruşturma ve kovuşturma aşamalarında müdafilik, suç şikayeti, mağdur vekillliği ve bireysel başvuru.</p>
+    </div>
+  </div>
+</section>
+
+<!-- NEDEN BİZ -->
+<section class="neden-biz">
+  <div style="text-align:center;max-width:600px;margin:0 auto;">
+    <div class="bolum-etiket" style="justify-content:center;"><span style="display:block;width:32px;height:1px;background:var(--bordo-acik);"></span>Fark Yaratan Özelliklerimiz</div>
+    <h2 class="bolum-baslik">Neden Bursa Hukuk Bürosu?</h2>
+  </div>
+  <div class="neden-grid">
+    <div class="neden-item">
+      <div class="neden-ikon">⚖️</div>
+      <h3>Uzman Kadro</h3>
+      <p>Alanında uzmanlaşmış avukatlardan oluşan deneyimli ekibimizle her davaya en doğru stratejiyi belirliyoruz.</p>
+    </div>
+    <div class="neden-item">
+      <div class="neden-ikon">🤝</div>
+      <h3>Şeffaf İletişim</h3>
+      <p>Müvekkillerimizi her adımda bilgilendiriyor, süreç hakkında net ve anlaşılır bilgi sunuyoruz.</p>
+    </div>
+    <div class="neden-item">
+      <div class="neden-ikon">🎯</div>
+      <h3>Sonuç Odaklı</h3>
+      <p>Dava stratejimizi müvekkilin en yüksek menfaatini gözetecek şekilde belirliyor, hedef odaklı çalışıyoruz.</p>
+    </div>
+    <div class="neden-item">
+      <div class="neden-ikon">🏛️</div>
+      <h3>Yerel Deneyim</h3>
+      <p>Bursa yargı çevrelerindeki derin deneyimimiz ve birikimimizle davanızı en etkin şekilde yönetiyoruz.</p>
+    </div>
+  </div>
+</section>
+
+<!-- İLETİŞİM -->
+<section id="iletisim">
+  <div class="iletisim">
+    <div class="iletisim-sol">
+      <div class="bolum-etiket">İletişim</div>
+      <h2 class="bolum-baslik">Hukuki destek için bize ulaşın</h2>
+      <p>İlk görüşme ücretsizdir. Size en uygun randevu zamanını birlikte belirleyelim.</p>
+      <div class="iletisim-bilgi">
+        <div class="iletisim-satir">
+          <div class="ikon">📍</div>
+          <div>
+            <div class="bilgi-label">Adres</div>
+            <div class="bilgi-deger">Osmangazi, Bursa</div>
+          </div>
+        </div>
+        <div class="iletisim-satir">
+          <div class="ikon">📞</div>
+          <div>
+            <div class="bilgi-label">Telefon</div>
+            <div class="bilgi-deger">+90 (224) 000 00 00</div>
+          </div>
+        </div>
+        <div class="iletisim-satir">
+          <div class="ikon">✉️</div>
+          <div>
+            <div class="bilgi-label">E-posta</div>
+            <div class="bilgi-deger">info@bursalaw.com</div>
+          </div>
+        </div>
+        <div class="iletisim-satir">
+          <div class="ikon">🕐</div>
+          <div>
+            <div class="bilgi-label">Çalışma Saatleri</div>
+            <div class="bilgi-deger">Pzt – Cum: 09:00 – 18:00</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-kart">
+      <h3>Randevu Talebi</h3>
+      <div class="form-grid">
+        <div class="form-grup">
+          <label>Ad</label>
+          <input type="text" placeholder="Adınız">
+        </div>
+        <div class="form-grup">
+          <label>Soyad</label>
+          <input type="text" placeholder="Soyadınız">
+        </div>
+      </div>
+      <div class="form-grup">
+        <label>E-posta</label>
+        <input type="email" placeholder="ornek@mail.com">
+      </div>
+      <div class="form-grup">
+        <label>Telefon</label>
+        <input type="tel" placeholder="+90 5XX XXX XX XX">
+      </div>
+      <div class="form-grup">
+        <label>Hukuki Konu</label>
+        <select>
+          <option value="">Konu seçiniz</option>
+          <option>İş Hukuku</option>
+          <option>Ticaret Hukuku</option>
+          <option>İcra & İflas</option>
+          <option>Aile Hukuku</option>
+          <option>Gayrimenkul</option>
+          <option>Ceza Hukuku</option>
+          <option>Diğer</option>
+        </select>
+      </div>
+      <div class="form-grup">
+        <label>Mesajınız</label>
+        <textarea placeholder="Hukuki durumunuzu kısaca açıklayınız..."></textarea>
+      </div>
+      <button class="btn-form" onclick="alert('Talebiniz alındı. En kısa sürede size ulaşacağız.')">Randevu Talebi Gönder</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-ust">
+    <div>
+      <div class="footer-logo">BURSA<span>LAW</span></div>
+      <div class="footer-slogan">Hakkınızı kararlılıkla savunuyoruz.</div>
+    </div>
+    <ul class="footer-linkler">
+      <li><a href="#hakkimizda">Hakkımızda</a></li>
+      <li><a href="#hizmetler">Hizmetler</a></li>
+      <li><a href="#iletisim">İletişim</a></li>
+    </ul>
+  </div>
+  <div class="footer-alt">
+    <div class="yasal">© 2025 Bursa Hukuk Bürosu — bursalaw.com</div>
+    <div class="yasal">Bu web sitesi hukuki danışmanlık niteliği taşımaz.</div>
+  </div>
+</footer>
+
+</body>
+</html>
