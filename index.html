@@ -3,890 +3,418 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bursa Hukuk Bürosu | bursalaw.com</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<title>BURSALAW — Hukuk, iplik iplik örülür.</title>
+<meta name="description" content="Bursa merkezli butik hukuk bürosu. Fikri mülkiyet, iş hukuku, ticaret hukuku ve dava takibi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=Manrope:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bordo: #7B2D3E;
-    --bordo-koyu: #5A1E2C;
-    --bordo-acik: #C4717F;
-    --bordo-pastel: #F5E8EB;
-    --krem: #F8F4F0;
-    --krem2: #EDE8E2;
-    --altin: #B8975A;
-    --altin-acik: #D4B57A;
-    --metin: #2C2420;
-    --metin-ikincil: #6B5B55;
-    --beyaz: #FFFFFF;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'Jost', sans-serif;
-    font-weight: 300;
-    color: var(--metin);
-    background: var(--krem);
-    font-size: 16px;
-    line-height: 1.8;
-  }
-
-  h1, h2, h3, h4 {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 400;
-    letter-spacing: 0.02em;
-  }
-
-  /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    background: rgba(248, 244, 240, 0.96);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--krem2);
-    padding: 0 5%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 72px;
-  }
-
-  .nav-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px;
-    color: var(--bordo-koyu);
-    letter-spacing: 0.08em;
-    text-decoration: none;
-  }
-
-  .nav-logo span {
-    color: var(--altin);
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 40px;
-    list-style: none;
-  }
-
-  .nav-links a {
-    font-size: 13px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--metin-ikincil);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
-  .nav-links a:hover { color: var(--bordo); }
-
-  .nav-cta {
-    font-size: 12px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--beyaz);
-    background: var(--bordo);
-    padding: 10px 24px;
-    text-decoration: none;
-    transition: background 0.2s;
-  }
-
-  .nav-cta:hover { background: var(--bordo-koyu); }
-
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    background: var(--bordo-koyu);
-    display: flex;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
-    padding: 120px 5% 80px;
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: 0; right: 0;
-    width: 45%;
-    height: 100%;
-    background: var(--bordo);
-    clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
-  }
-
-  .hero::after {
-    content: '"';
-    position: absolute;
-    right: 8%;
-    top: 50%;
-    transform: translateY(-50%);
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 400px;
-    color: rgba(255,255,255,0.04);
-    line-height: 1;
-  }
-
-  .hero-icerik {
-    position: relative;
-    z-index: 2;
-    max-width: 700px;
-  }
-
-  .hero-etiket {
-    font-size: 11px;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--altin-acik);
-    margin-bottom: 28px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .hero-etiket::before {
-    content: '';
-    display: block;
-    width: 40px;
-    height: 1px;
-    background: var(--altin);
-  }
-
-  .hero h1 {
-    font-size: clamp(42px, 5vw, 72px);
-    color: var(--beyaz);
-    line-height: 1.15;
-    margin-bottom: 24px;
-  }
-
-  .hero h1 em {
-    color: var(--altin-acik);
-    font-style: italic;
-  }
-
-  .hero p {
-    font-size: 17px;
-    color: rgba(255,255,255,0.65);
-    max-width: 520px;
-    margin-bottom: 48px;
-    line-height: 1.9;
-  }
-
-  .hero-butonlar {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-
-  .btn-birincil {
-    background: var(--altin);
-    color: var(--beyaz);
-    padding: 16px 36px;
-    font-family: 'Jost', sans-serif;
-    font-size: 12px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: background 0.2s;
-  }
-
-  .btn-birincil:hover { background: var(--altin-acik); }
-
-  .btn-ikincil {
-    border: 1px solid rgba(255,255,255,0.3);
-    color: rgba(255,255,255,0.75);
-    padding: 16px 36px;
-    font-family: 'Jost', sans-serif;
-    font-size: 12px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: all 0.2s;
-  }
-
-  .btn-ikincil:hover {
-    border-color: rgba(255,255,255,0.6);
-    color: var(--beyaz);
-  }
-
-  .hero-rakamlar {
-    position: absolute;
-    bottom: 60px;
-    right: 5%;
-    z-index: 2;
-    display: flex;
-    gap: 48px;
-  }
-
-  .rakam-blok {
-    text-align: center;
-  }
-
-  .rakam-blok .rakam {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 48px;
-    color: var(--beyaz);
-    line-height: 1;
-  }
-
-  .rakam-blok .rakam span {
-    color: var(--altin-acik);
-  }
-
-  .rakam-blok .label {
-    font-size: 11px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.45);
-    margin-top: 6px;
-  }
-
-  /* AYIRICI */
-  .altin-serit {
-    height: 4px;
-    background: linear-gradient(90deg, var(--bordo), var(--altin), var(--bordo));
-  }
-
-  /* HAKKIMIZDA */
-  .hakkimizda {
-    padding: 100px 5%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .bolum-etiket {
-    font-size: 11px;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--bordo-acik);
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .bolum-etiket::before {
-    content: '';
-    display: block;
-    width: 32px;
-    height: 1px;
-    background: var(--bordo-acik);
-  }
-
-  .bolum-baslik {
-    font-size: clamp(30px, 3vw, 48px);
-    color: var(--bordo-koyu);
-    line-height: 1.2;
-    margin-bottom: 24px;
-  }
-
-  .hakkimizda-metin p {
-    color: var(--metin-ikincil);
-    margin-bottom: 20px;
-    font-size: 15px;
-    line-height: 1.9;
-  }
-
-  .altin-cizgi {
-    width: 60px;
-    height: 2px;
-    background: var(--altin);
-    margin: 32px 0;
-  }
-
-  .hakkimizda-kart {
-    background: var(--bordo-pastel);
-    padding: 48px;
-    position: relative;
-  }
-
-  .hakkimizda-kart::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 4px;
-    height: 100%;
-    background: var(--bordo);
-  }
-
-  .kart-icerik {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px;
-    color: var(--bordo-koyu);
-    line-height: 1.6;
-    font-style: italic;
-    margin-bottom: 24px;
-  }
-
-  .kart-alt {
-    font-size: 12px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--metin-ikincil);
-  }
-
-  /* HİZMETLER */
-  .hizmetler {
-    background: var(--bordo-koyu);
-    padding: 100px 5%;
-  }
-
-  .hizmetler-baslik-alan {
-    text-align: center;
-    max-width: 600px;
-    margin: 0 auto 64px;
-  }
-
-  .hizmetler .bolum-etiket {
-    justify-content: center;
-  }
-
-  .hizmetler .bolum-etiket::before { display: none; }
-
-  .hizmetler .bolum-baslik {
-    color: var(--beyaz);
-  }
-
-  .hizmetler-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .hizmet-kart {
-    background: rgba(255,255,255,0.04);
-    padding: 40px 36px;
-    border-top: 2px solid transparent;
-    transition: all 0.3s;
-    cursor: default;
-  }
-
-  .hizmet-kart:hover {
-    background: rgba(255,255,255,0.08);
-    border-top-color: var(--altin);
-  }
-
-  .hizmet-no {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 48px;
-    color: rgba(255,255,255,0.08);
-    line-height: 1;
-    margin-bottom: 20px;
-  }
-
-  .hizmet-baslik {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 24px;
-    color: var(--beyaz);
-    margin-bottom: 16px;
-  }
-
-  .hizmet-aciklama {
-    font-size: 14px;
-    color: rgba(255,255,255,0.5);
-    line-height: 1.8;
-  }
-
-  /* NEDEN BİZ */
-  .neden-biz {
-    padding: 100px 5%;
-    background: var(--krem2);
-  }
-
-  .neden-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 40px;
-    max-width: 1200px;
-    margin: 64px auto 0;
-  }
-
-  .neden-item {
-    text-align: center;
-    padding: 40px 24px;
-    background: var(--beyaz);
-    border-bottom: 3px solid transparent;
-    transition: border-color 0.3s;
-  }
-
-  .neden-item:hover { border-bottom-color: var(--bordo); }
-
-  .neden-ikon {
-    width: 56px;
-    height: 56px;
-    background: var(--bordo-pastel);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 20px;
-    font-size: 22px;
-  }
-
-  .neden-item h3 {
-    font-size: 20px;
-    color: var(--bordo-koyu);
-    margin-bottom: 12px;
-  }
-
-  .neden-item p {
-    font-size: 14px;
-    color: var(--metin-ikincil);
-    line-height: 1.8;
-  }
-
-  /* İLETİŞİM */
-  .iletisim {
-    padding: 100px 5%;
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: start;
-  }
-
-  .iletisim-sol .bolum-baslik { margin-bottom: 16px; }
-
-  .iletisim-sol > p {
-    font-size: 15px;
-    color: var(--metin-ikincil);
-    margin-bottom: 40px;
-  }
-
-  .iletisim-bilgi {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
-
-  .iletisim-satir {
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-  }
-
-  .iletisim-satir .ikon {
-    width: 40px;
-    height: 40px;
-    background: var(--bordo-pastel);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    font-size: 16px;
-  }
-
-  .iletisim-satir .bilgi-label {
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--bordo-acik);
-    margin-bottom: 4px;
-  }
-
-  .iletisim-satir .bilgi-deger {
-    font-size: 15px;
-    color: var(--metin);
-  }
-
-  /* FORM */
-  .form-kart {
-    background: var(--beyaz);
-    padding: 48px;
-    border-top: 4px solid var(--bordo);
-  }
-
-  .form-kart h3 {
-    font-size: 28px;
-    color: var(--bordo-koyu);
-    margin-bottom: 32px;
-  }
-
-  .form-grup {
-    margin-bottom: 20px;
-  }
-
-  .form-grup label {
-    display: block;
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--metin-ikincil);
-    margin-bottom: 8px;
-  }
-
-  .form-grup input,
-  .form-grup textarea,
-  .form-grup select {
-    width: 100%;
-    padding: 12px 16px;
-    border: 1px solid var(--krem2);
-    background: var(--krem);
-    font-family: 'Jost', sans-serif;
-    font-size: 14px;
-    color: var(--metin);
-    outline: none;
-    transition: border-color 0.2s;
-    appearance: none;
-  }
-
-  .form-grup input:focus,
-  .form-grup textarea:focus,
-  .form-grup select:focus {
-    border-color: var(--bordo);
-  }
-
-  .form-grup textarea { resize: vertical; min-height: 110px; }
-
-  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-
-  .btn-form {
-    width: 100%;
-    background: var(--bordo);
-    color: var(--beyaz);
-    border: none;
-    padding: 16px;
-    font-family: 'Jost', sans-serif;
-    font-size: 12px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background 0.2s;
-    margin-top: 8px;
-  }
-
-  .btn-form:hover { background: var(--bordo-koyu); }
-
-  /* FOOTER */
-  footer {
-    background: var(--bordo-koyu);
-    padding: 60px 5% 32px;
-    color: rgba(255,255,255,0.5);
-  }
-
-  .footer-ust {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 40px;
-    margin-bottom: 48px;
-    padding-bottom: 48px;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-  }
-
-  .footer-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 28px;
-    color: var(--beyaz);
-    letter-spacing: 0.08em;
-  }
-
-  .footer-logo span { color: var(--altin); }
-
-  .footer-slogan {
-    font-size: 13px;
-    color: rgba(255,255,255,0.4);
-    margin-top: 8px;
-    letter-spacing: 0.05em;
-  }
-
-  .footer-linkler {
-    display: flex;
-    gap: 40px;
-    list-style: none;
-  }
-
-  .footer-linkler a {
-    font-size: 12px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.45);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
-  .footer-linkler a:hover { color: var(--altin-acik); }
-
-  .footer-alt {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 12px;
-  }
-
-  .yasal {
-    font-size: 11px;
-    letter-spacing: 0.05em;
-    color: rgba(255,255,255,0.3);
-  }
-
-  @media (max-width: 768px) {
-    .nav-links, .nav-cta { display: none; }
-    .hero::before { width: 100%; clip-path: none; opacity: 0.3; }
-    .hero-rakamlar { position: static; margin-top: 48px; justify-content: flex-start; }
-    .hakkimizda, .iletisim { grid-template-columns: 1fr; gap: 40px; }
-    .footer-ust { flex-direction: column; }
-    .footer-linkler { flex-wrap: wrap; gap: 20px; }
-    .footer-alt { flex-direction: column; gap: 12px; text-align: center; }
-    .form-grid { grid-template-columns: 1fr; }
-  }
+:root{
+  --ink:#0B0D12;
+  --ink-soft:#14171F;
+  --silk:#EDE9DF;
+  --silk-dim:#B9B4A6;
+  --crimson:#A6301F;
+  --line:rgba(237,233,223,.12);
+  --line-dark:rgba(11,13,18,.14);
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--ink);
+  color:var(--silk);
+  font-family:'Manrope',sans-serif;
+  font-weight:300;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  cursor:none;
+}
+::selection{background:var(--crimson);color:var(--silk)}
+a{color:inherit;text-decoration:none}
+img{max-width:100%}
+
+/* ---------- cursor ---------- */
+.cursor{
+  position:fixed;top:0;left:0;width:10px;height:10px;border-radius:50%;
+  background:var(--crimson);pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);transition:width .25s var(--ease),height .25s var(--ease),background .25s;
+  mix-blend-mode:normal;
+}
+.cursor.grow{width:56px;height:56px;background:rgba(166,48,31,.25);backdrop-filter:blur(1px)}
+@media (hover:none){.cursor{display:none}body{cursor:auto}}
+
+/* ---------- nav ---------- */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.4rem 3rem;
+  mix-blend-mode:difference;
+}
+.logo{font-family:'Fraunces',serif;font-weight:600;font-size:1.05rem;letter-spacing:.14em}
+.logo span{color:#fff}
+nav ul{display:flex;gap:2.2rem;list-style:none}
+nav ul a{
+  font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.18em;
+  text-transform:uppercase;color:#fff;opacity:.75;transition:opacity .3s;
+}
+nav ul a:hover{opacity:1}
+@media(max-width:760px){nav{padding:1.2rem 1.4rem}nav ul{display:none}}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;min-height:100svh;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:0 3rem 4rem;overflow:hidden;
+}
+#threads{position:absolute;inset:0;width:100%;height:100%}
+.hero-eyebrow{
+  font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.3em;
+  text-transform:uppercase;color:var(--silk-dim);margin-bottom:1.4rem;
+  position:relative;z-index:2;
+}
+.hero h1{
+  font-family:'Fraunces',serif;font-weight:300;
+  font-size:clamp(3rem,11vw,10.5rem);
+  line-height:.94;letter-spacing:-.02em;
+  position:relative;z-index:2;
+}
+.hero h1 em{font-style:italic;font-weight:400;color:transparent;-webkit-text-stroke:1px var(--silk)}
+.hero h1 .accent{color:var(--crimson);font-style:italic}
+.hero-sub{
+  position:relative;z-index:2;margin-top:2.4rem;
+  display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap;
+}
+.hero-sub p{max-width:34ch;font-size:1.02rem;line-height:1.7;color:var(--silk-dim)}
+.scroll-cue{
+  font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:.25em;
+  text-transform:uppercase;color:var(--silk-dim);
+  display:flex;align-items:center;gap:.8rem;
+}
+.scroll-cue::after{
+  content:"";display:block;width:1px;height:44px;background:var(--silk-dim);
+  animation:drip 2.2s var(--ease) infinite;transform-origin:top;
+}
+@keyframes drip{0%{transform:scaleY(0)}55%{transform:scaleY(1)}100%{transform:scaleY(0);transform-origin:bottom}}
+@media(max-width:760px){.hero{padding:0 1.4rem 3rem}}
+
+/* ---------- marquee ---------- */
+.marquee{
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  overflow:hidden;white-space:nowrap;padding:1.1rem 0;background:var(--ink);
+}
+.marquee-track{display:inline-block;animation:scroll 28s linear infinite}
+.marquee span{
+  font-family:'Fraunces',serif;font-style:italic;font-size:1.3rem;
+  color:var(--silk-dim);margin:0 2.4rem;
+}
+.marquee b{color:var(--crimson);font-weight:400;margin:0 0.2rem}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ---------- manifesto ---------- */
+.manifesto{padding:12rem 3rem;max-width:1200px;margin:0 auto}
+.manifesto h2{
+  font-family:'Fraunces',serif;font-weight:300;
+  font-size:clamp(1.8rem,4.4vw,3.6rem);line-height:1.28;letter-spacing:-.01em;
+}
+.manifesto h2 .w{
+  display:inline-block;opacity:.12;transform:translateY(.3em);
+  transition:opacity .7s var(--ease),transform .7s var(--ease);
+}
+.manifesto h2 .w.in{opacity:1;transform:none}
+.manifesto h2 .hl{color:var(--crimson);font-style:italic}
+.manifesto-tag{
+  font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.3em;
+  text-transform:uppercase;color:var(--silk-dim);margin-bottom:3rem;display:block;
+}
+@media(max-width:760px){.manifesto{padding:7rem 1.4rem}}
+
+/* ---------- slides (practice areas) ---------- */
+.slides-head{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  padding:0 3rem 2.5rem;max-width:100%;
+}
+.slides-head h3{
+  font-family:'Fraunces',serif;font-weight:300;font-size:clamp(2.2rem,6vw,5rem);
+  letter-spacing:-.02em;
+}
+.slides-hint{
+  font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--silk-dim);
+}
+.slides{
+  display:flex;gap:1.5rem;overflow-x:auto;padding:0 3rem 5rem;
+  scroll-snap-type:x mandatory;scrollbar-width:none;
+}
+.slides::-webkit-scrollbar{display:none}
+.slide{
+  flex:0 0 min(78vw,520px);scroll-snap-align:start;
+  border:1px solid var(--line);padding:2.6rem 2.2rem;
+  min-height:420px;display:flex;flex-direction:column;justify-content:space-between;
+  background:var(--ink-soft);position:relative;overflow:hidden;
+  transition:border-color .4s;
+}
+.slide::before{
+  content:"";position:absolute;left:0;top:0;width:100%;height:2px;
+  background:var(--crimson);transform:scaleX(0);transform-origin:left;
+  transition:transform .6s var(--ease);
+}
+.slide:hover{border-color:rgba(237,233,223,.3)}
+.slide:hover::before{transform:scaleX(1)}
+.slide-code{
+  font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:.25em;
+  color:var(--crimson);text-transform:uppercase;
+}
+.slide h4{
+  font-family:'Fraunces',serif;font-weight:400;font-size:2rem;
+  margin:1.6rem 0 1rem;letter-spacing:-.01em;
+}
+.slide p{color:var(--silk-dim);line-height:1.75;font-size:.95rem}
+.slide ul{list-style:none;margin-top:1.8rem;display:flex;flex-wrap:wrap;gap:.5rem}
+.slide li{
+  font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.12em;
+  border:1px solid var(--line);padding:.42rem .8rem;color:var(--silk-dim);
+  text-transform:uppercase;border-radius:999px;
+}
+@media(max-width:760px){.slides,.slides-head{padding-left:1.4rem;padding-right:1.4rem}}
+
+/* ---------- light band / approach ---------- */
+.light{
+  background:var(--silk);color:var(--ink);
+  padding:10rem 3rem;
+}
+.light-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem}
+.light h3{
+  font-family:'Fraunces',serif;font-weight:300;font-size:clamp(2.2rem,5vw,4rem);
+  line-height:1.08;letter-spacing:-.02em;
+}
+.light h3 em{font-style:italic;color:var(--crimson)}
+.steps{display:flex;flex-direction:column}
+.step{
+  border-top:1px solid var(--line-dark);padding:1.8rem 0;
+  display:grid;grid-template-columns:auto 1fr;gap:1.6rem;align-items:baseline;
+}
+.step:last-child{border-bottom:1px solid var(--line-dark)}
+.step-k{font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:.2em;color:var(--crimson)}
+.step h5{font-family:'Fraunces',serif;font-weight:600;font-size:1.15rem;margin-bottom:.5rem}
+.step p{color:#4c4a43;font-size:.92rem;line-height:1.7}
+@media(max-width:900px){.light-inner{grid-template-columns:1fr;gap:3rem}.light{padding:6rem 1.4rem}}
+
+/* ---------- big contact ---------- */
+.contact{padding:12rem 3rem 4rem;position:relative;overflow:hidden}
+.contact-eyebrow{
+  font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.3em;
+  text-transform:uppercase;color:var(--silk-dim);margin-bottom:2rem;display:block;
+}
+.contact a.big{
+  font-family:'Fraunces',serif;font-weight:300;font-style:italic;
+  font-size:clamp(2.4rem,8.5vw,7.5rem);letter-spacing:-.02em;line-height:1.05;
+  display:inline-block;position:relative;
+}
+.contact a.big::after{
+  content:"";position:absolute;left:0;bottom:.06em;width:100%;height:1px;
+  background:var(--crimson);transform:scaleX(0);transform-origin:left;transition:transform .6s var(--ease);
+}
+.contact a.big:hover::after{transform:scaleX(1)}
+.contact-meta{
+  margin-top:5rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:2rem;
+  border-top:1px solid var(--line);padding-top:2rem;
+  font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--silk-dim);
+}
+@media(max-width:760px){.contact{padding:7rem 1.4rem 3rem}}
+
+/* ---------- reveal on scroll ---------- */
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .reveal,.manifesto h2 .w{opacity:1;transform:none}
+  body{cursor:auto}.cursor{display:none}
+  html{scroll-behavior:auto}
+}
 </style>
 </head>
 <body>
 
+<div class="cursor" id="cursor"></div>
+
 <nav>
-  <a href="#" class="nav-logo">BURSA<span>LAW</span></a>
-  <ul class="nav-links">
-    <li><a href="#hakkimizda">Hakkımızda</a></li>
-    <li><a href="#hizmetler">Hizmetler</a></li>
-    <li><a href="#iletisim">İletişim</a></li>
+  <div class="logo"><span>BURSA</span><span style="color:#b3402f">LAW</span></div>
+  <ul>
+    <li><a href="#alanlar" data-hover>Alanlar</a></li>
+    <li><a href="#yaklasim" data-hover>Yaklaşım</a></li>
+    <li><a href="#iletisim" data-hover>İletişim</a></li>
   </ul>
-  <a href="#iletisim" class="nav-cta">Randevu Al</a>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-icerik">
-    <div class="hero-etiket">Bursa Hukuk Bürosu</div>
-    <h1>Hakkınızı <em>kararlılıkla</em> savunuyoruz.</h1>
-    <p>Yılların deneyimi ve uzmanlığıyla, her türlü hukuki uyuşmazlıkta yanınızdayız. Güçlü, güvenilir ve sonuç odaklı hukuki destek.</p>
-    <div class="hero-butonlar">
-      <a href="#iletisim" class="btn-birincil">Ücretsiz Danışın</a>
-      <a href="#hizmetler" class="btn-ikincil">Hizmetlerimiz</a>
-    </div>
+<header class="hero">
+  <canvas id="threads" aria-hidden="true"></canvas>
+  <div class="hero-eyebrow">Bursa · Hukuk Bürosu · Est. Koza Han'ın gölgesinde</div>
+  <h1>Hukuk,<br><em>iplik iplik</em><br>örülür<span class="accent">.</span></h1>
+  <div class="hero-sub">
+    <p>İpeğin şehrinde, davaları da öyle dokuyoruz: ince işçilik, sağlam düğüm, kopmayan strateji.</p>
+    <div class="scroll-cue">Kaydır</div>
   </div>
-  <div class="hero-rakamlar">
-    <div class="rakam-blok">
-      <div class="rakam">15<span>+</span></div>
-      <div class="label">Yıl Deneyim</div>
-    </div>
-    <div class="rakam-blok">
-      <div class="rakam">500<span>+</span></div>
-      <div class="label">Başarılı Dava</div>
-    </div>
-    <div class="rakam-blok">
-      <div class="rakam">98<span>%</span></div>
-      <div class="label">Müvekkil Memnuniyeti</div>
+</header>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track" id="mq">
+    <span>Fikri Mülkiyet <b>·</b></span><span>İş Hukuku <b>·</b></span><span>Ticaret &amp; Şirketler <b>·</b></span><span>Dava &amp; Uyuşmazlık <b>·</b></span><span>Marka &amp; Patent <b>·</b></span><span>KVKK &amp; Teknoloji <b>·</b></span>
+  </div>
+</div>
+
+<section class="manifesto">
+  <span class="manifesto-tag">Manifesto</span>
+  <h2 id="mani">Bir dava, binlerce sayfa dosyanın içindeki tek bir <span class="hl">doğru düğümle</span> kazanılır. Biz o düğümü bulur, gerisini onun etrafında öreriz. Süs yok, kalabalık yok — sadece <span class="hl">keskin hukuk</span>.</h2>
+</section>
+
+<section id="alanlar">
+  <div class="slides-head">
+    <h3 class="reveal">Çalışma Alanları</h3>
+    <div class="slides-hint">← Sürükle / Kaydır →</div>
+  </div>
+  <div class="slides">
+    <article class="slide" data-hover>
+      <div>
+        <div class="slide-code">FSEK · SMK</div>
+        <h4>Fikri Mülkiyet</h4>
+        <p>Marka tecavüzünden telif ihlaline, ihtiyati tedbirden istinaf stratejisine kadar fikri hakların tüm cephelerinde dosya yönetimi.</p>
+      </div>
+      <ul><li>Marka Davaları</li><li>Telif</li><li>Haksız Rekabet</li><li>Tedbir</li></ul>
+    </article>
+    <article class="slide" data-hover>
+      <div>
+        <div class="slide-code">4857 · 7036</div>
+        <h4>İş Hukuku</h4>
+        <p>İşe iade, kıdem–ihbar tazminatı, ikale ve arabuluculuk sonrası uyuşmazlıklar; bilirkişi raporlarına nokta atışı itirazlar.</p>
+      </div>
+      <ul><li>İşe İade</li><li>Kıdem / İhbar</li><li>Mobbing</li><li>Arabuluculuk</li></ul>
+    </article>
+    <article class="slide" data-hover>
+      <div>
+        <div class="slide-code">TTK · TBK</div>
+        <h4>Ticaret &amp; Şirketler</h4>
+        <p>Sözleşme mimarisi, ortaklık uyuşmazlıkları, fesih davaları ve kayyım süreçleri dahil şirketler hukukunun sert virajları.</p>
+      </div>
+      <ul><li>Sözleşmeler</li><li>Ortaklık</li><li>Çek / Senet</li><li>Fesih</li></ul>
+    </article>
+    <article class="slide" data-hover>
+      <div>
+        <div class="slide-code">HMK · İİK</div>
+        <h4>Dava &amp; Uyuşmazlık</h4>
+        <p>İlk derece mahkemesinden istinaf ve Yargıtay'a uzanan yolda usul hukukunu bir silah gibi kullanan dava takibi.</p>
+      </div>
+      <ul><li>İstinaf</li><li>Temyiz</li><li>İcra Takibi</li><li>Delil Tespiti</li></ul>
+    </article>
+    <article class="slide" data-hover>
+      <div>
+        <div class="slide-code">KVKK · AI</div>
+        <h4>Teknoloji &amp; Veri</h4>
+        <p>Yapay zekâ, biyometrik veri, yazılım sözleşmeleri ve KVKK uyum süreçleri — hukukun en yeni dokusunda danışmanlık.</p>
+      </div>
+      <ul><li>KVKK Uyum</li><li>Yazılım Sözleşmeleri</li><li>AI &amp; Veri</li></ul>
+    </article>
+  </div>
+</section>
+
+<section class="light" id="yaklasim">
+  <div class="light-inner">
+    <h3 class="reveal">Nasıl <em>çalışıyoruz?</em><br>İpek gibi ince,<br>çelik gibi sağlam.</h3>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-k">Dinle</div>
+        <div><h5>Önce dosya konuşur</h5><p>Binlerce sayfayı satır satır okuruz. Davanın kaderini belirleyen detay çoğu zaman dipnottadır.</p></div>
+      </div>
+      <div class="step reveal">
+        <div class="step-k">Çöz</div>
+        <div><h5>Tek düğüm stratejisi</h5><p>Her uyuşmazlığın bir kilit noktası vardır. Tüm argüman mimarisini o noktanın üzerine kurarız.</p></div>
+      </div>
+      <div class="step reveal">
+        <div class="step-k">Ör</div>
+        <div><h5>Dilekçe bir dokumadır</h5><p>Usul, içtihat ve olgu tek kumaşta birleşir. Mahkemenin elinde kopmayan bir metin bırakırız.</p></div>
+      </div>
+      <div class="step reveal">
+        <div class="step-k">Bitir</div>
+        <div><h5>Sonuca kadar takip</h5><p>Karar çıkana, icra bitene kadar dosyanın başındayız. Yarım bırakılmış iş, kaybedilmiş iştir.</p></div>
+      </div>
     </div>
   </div>
 </section>
 
-<div class="altin-serit"></div>
-
-<!-- HAKKIMIZDA -->
-<section id="hakkimizda">
-  <div class="hakkimizda">
-    <div class="hakkimizda-metin">
-      <div class="bolum-etiket">Hakkımızda</div>
-      <h2 class="bolum-baslik">Bursa'nın güvenilir hukuk bürosu</h2>
-      <p>Bursa Hukuk Bürosu olarak, müvekkillerimizin hukuki sorunlarına kalıcı ve etkin çözümler üretmeyi temel ilkemiz olarak benimsiyoruz. İş hukukundan ticaret hukukuna, aile hukukundan icra takiplerine kadar geniş bir alanda uzmanlaşmış avukat kadromuzla hizmet veriyoruz.</p>
-      <p>Her davayı kişisel olarak ele alıyor; müvekkillerimizi sürecin her adımında bilgilendiriyor ve haklarını en üst düzeyde korumak için çalışıyoruz.</p>
-      <div class="altin-cizgi"></div>
-      <p style="font-family:'Cormorant Garamond',serif; font-size:18px; font-style:italic; color:var(--bordo-koyu);">"Adalet, yalnızca bilginin değil; deneyimin ve kararlılığın meyvesidir."</p>
-    </div>
-    <div class="hakkimizda-kart">
-      <div class="kart-icerik">Hukuki süreçler, hayatınızın en kritik anlarında ortaya çıkar. Bu anlarda yanınızda olabilmek en büyük sorumluluğumuzdur.</div>
-      <div class="altin-cizgi"></div>
-      <div style="display:flex;flex-direction:column;gap:16px;">
-        <div style="display:flex;align-items:center;gap:12px;">
-          <div style="width:8px;height:8px;background:var(--bordo);border-radius:50%;flex-shrink:0;"></div>
-          <span style="font-size:14px;color:var(--metin-ikincil);">Ücretsiz ilk danışmanlık görüşmesi</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:12px;">
-          <div style="width:8px;height:8px;background:var(--bordo);border-radius:50%;flex-shrink:0;"></div>
-          <span style="font-size:14px;color:var(--metin-ikincil);">Şeffaf ve net ücretlendirme politikası</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:12px;">
-          <div style="width:8px;height:8px;background:var(--bordo);border-radius:50%;flex-shrink:0;"></div>
-          <span style="font-size:14px;color:var(--metin-ikincil);">7/24 ulaşılabilir avukat desteği</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:12px;">
-          <div style="width:8px;height:8px;background:var(--bordo);border-radius:50%;flex-shrink:0;"></div>
-          <span style="font-size:14px;color:var(--metin-ikincil);">Dava sürecinde anlık bilgilendirme</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- HİZMETLER -->
-<section id="hizmetler" class="hizmetler">
-  <div class="hizmetler-baslik-alan">
-    <div class="bolum-etiket" style="color:var(--altin-acik);">Uzmanlık Alanlarımız</div>
-    <h2 class="bolum-baslik">Hizmetlerimiz</h2>
-    <p style="font-size:14px;color:rgba(255,255,255,0.45);margin-top:16px;">Her hukuki uyuşmazlıkta derinlemesine bilgi ve pratik deneyimi bir araya getiriyoruz.</p>
-  </div>
-  <div class="hizmetler-grid">
-    <div class="hizmet-kart">
-      <div class="hizmet-no">01</div>
-      <h3 class="hizmet-baslik">İş Hukuku</h3>
-      <p class="hizmet-aciklama">İşe iade, kıdem ve ihbar tazminatı, mobbing, iş kazası, toplu iş sözleşmeleri ve işçi-işveren uyuşmazlıklarında kapsamlı hukuki destek.</p>
-    </div>
-    <div class="hizmet-kart">
-      <div class="hizmet-no">02</div>
-      <h3 class="hizmet-baslik">Ticaret Hukuku</h3>
-      <p class="hizmet-aciklama">Şirket kuruluşu ve tasfiyesi, sözleşme hukuku, ticari uyuşmazlıklar, ortaklık anlaşmazlıkları ve ticari alacak takibi.</p>
-    </div>
-    <div class="hizmet-kart">
-      <div class="hizmet-no">03</div>
-      <h3 class="hizmet-baslik">İcra & İflas Hukuku</h3>
-      <p class="hizmet-aciklama">Alacak takibi, itirazın iptali, menfi tespit ve istirdat davaları, haciz işlemleri, iflas ve konkordato süreçleri.</p>
-    </div>
-    <div class="hizmet-kart">
-      <div class="hizmet-no">04</div>
-      <h3 class="hizmet-baslik">Aile Hukuku</h3>
-      <p class="hizmet-aciklama">Boşanma davaları, nafaka ve velayet, mal paylaşımı, miras uyuşmazlıkları ve aile içi hukuki düzenlemeler.</p>
-    </div>
-    <div class="hizmet-kart">
-      <div class="hizmet-no">05</div>
-      <h3 class="hizmet-baslik">Gayrimenkul Hukuku</h3>
-      <p class="hizmet-aciklama">Tapu iptali ve tescil, kira uyuşmazlıkları, kat mülkiyeti, tahliye davaları ve inşaat sözleşme hukuku.</p>
-    </div>
-    <div class="hizmet-kart">
-      <div class="hizmet-no">06</div>
-      <h3 class="hizmet-baslik">Ceza Hukuku</h3>
-      <p class="hizmet-aciklama">Soruşturma ve kovuşturma aşamalarında müdafilik, suç şikayeti, mağdur vekillliği ve bireysel başvuru.</p>
-    </div>
-  </div>
-</section>
-
-<!-- NEDEN BİZ -->
-<section class="neden-biz">
-  <div style="text-align:center;max-width:600px;margin:0 auto;">
-    <div class="bolum-etiket" style="justify-content:center;"><span style="display:block;width:32px;height:1px;background:var(--bordo-acik);"></span>Fark Yaratan Özelliklerimiz</div>
-    <h2 class="bolum-baslik">Neden Bursa Hukuk Bürosu?</h2>
-  </div>
-  <div class="neden-grid">
-    <div class="neden-item">
-      <div class="neden-ikon">⚖️</div>
-      <h3>Uzman Kadro</h3>
-      <p>Alanında uzmanlaşmış avukatlardan oluşan deneyimli ekibimizle her davaya en doğru stratejiyi belirliyoruz.</p>
-    </div>
-    <div class="neden-item">
-      <div class="neden-ikon">🤝</div>
-      <h3>Şeffaf İletişim</h3>
-      <p>Müvekkillerimizi her adımda bilgilendiriyor, süreç hakkında net ve anlaşılır bilgi sunuyoruz.</p>
-    </div>
-    <div class="neden-item">
-      <div class="neden-ikon">🎯</div>
-      <h3>Sonuç Odaklı</h3>
-      <p>Dava stratejimizi müvekkilin en yüksek menfaatini gözetecek şekilde belirliyor, hedef odaklı çalışıyoruz.</p>
-    </div>
-    <div class="neden-item">
-      <div class="neden-ikon">🏛️</div>
-      <h3>Yerel Deneyim</h3>
-      <p>Bursa yargı çevrelerindeki derin deneyimimiz ve birikimimizle davanızı en etkin şekilde yönetiyoruz.</p>
-    </div>
-  </div>
-</section>
-
-<!-- İLETİŞİM -->
-<section id="iletisim">
-  <div class="iletisim">
-    <div class="iletisim-sol">
-      <div class="bolum-etiket">İletişim</div>
-      <h2 class="bolum-baslik">Hukuki destek için bize ulaşın</h2>
-      <p>İlk görüşme ücretsizdir. Size en uygun randevu zamanını birlikte belirleyelim.</p>
-      <div class="iletisim-bilgi">
-        <div class="iletisim-satir">
-          <div class="ikon">📍</div>
-          <div>
-            <div class="bilgi-label">Adres</div>
-            <div class="bilgi-deger">Osmangazi, Bursa</div>
-          </div>
-        </div>
-        <div class="iletisim-satir">
-          <div class="ikon">📞</div>
-          <div>
-            <div class="bilgi-label">Telefon</div>
-            <div class="bilgi-deger">+90 (224) 000 00 00</div>
-          </div>
-        </div>
-        <div class="iletisim-satir">
-          <div class="ikon">✉️</div>
-          <div>
-            <div class="bilgi-label">E-posta</div>
-            <div class="bilgi-deger">info@bursalaw.com</div>
-          </div>
-        </div>
-        <div class="iletisim-satir">
-          <div class="ikon">🕐</div>
-          <div>
-            <div class="bilgi-label">Çalışma Saatleri</div>
-            <div class="bilgi-deger">Pzt – Cum: 09:00 – 18:00</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="form-kart">
-      <h3>Randevu Talebi</h3>
-      <div class="form-grid">
-        <div class="form-grup">
-          <label>Ad</label>
-          <input type="text" placeholder="Adınız">
-        </div>
-        <div class="form-grup">
-          <label>Soyad</label>
-          <input type="text" placeholder="Soyadınız">
-        </div>
-      </div>
-      <div class="form-grup">
-        <label>E-posta</label>
-        <input type="email" placeholder="ornek@mail.com">
-      </div>
-      <div class="form-grup">
-        <label>Telefon</label>
-        <input type="tel" placeholder="+90 5XX XXX XX XX">
-      </div>
-      <div class="form-grup">
-        <label>Hukuki Konu</label>
-        <select>
-          <option value="">Konu seçiniz</option>
-          <option>İş Hukuku</option>
-          <option>Ticaret Hukuku</option>
-          <option>İcra & İflas</option>
-          <option>Aile Hukuku</option>
-          <option>Gayrimenkul</option>
-          <option>Ceza Hukuku</option>
-          <option>Diğer</option>
-        </select>
-      </div>
-      <div class="form-grup">
-        <label>Mesajınız</label>
-        <textarea placeholder="Hukuki durumunuzu kısaca açıklayınız..."></textarea>
-      </div>
-      <button class="btn-form" onclick="alert('Talebiniz alındı. En kısa sürede size ulaşacağız.')">Randevu Talebi Gönder</button>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-ust">
-    <div>
-      <div class="footer-logo">BURSA<span>LAW</span></div>
-      <div class="footer-slogan">Hakkınızı kararlılıkla savunuyoruz.</div>
-    </div>
-    <ul class="footer-linkler">
-      <li><a href="#hakkimizda">Hakkımızda</a></li>
-      <li><a href="#hizmetler">Hizmetler</a></li>
-      <li><a href="#iletisim">İletişim</a></li>
-    </ul>
-  </div>
-  <div class="footer-alt">
-    <div class="yasal">© 2025 Bursa Hukuk Bürosu — bursalaw.com</div>
-    <div class="yasal">Bu web sitesi hukuki danışmanlık niteliği taşımaz.</div>
+<footer class="contact" id="iletisim">
+  <span class="contact-eyebrow">Bir dosyanız mı var?</span>
+  <a class="big" href="mailto:info@bursalaw.com" data-hover>info@bursalaw.com</a>
+  <div class="contact-meta">
+    <span>Bursa, Türkiye</span>
+    <span>Pzt–Cum · 09:00–18:00</span>
+    <span>© 2026 BURSALAW</span>
   </div>
 </footer>
 
+<script>
+/* ---------- silk threads canvas ---------- */
+const cv = document.getElementById('threads');
+const ctx = cv.getContext('2d');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let W,H,t=0, mx=.5,my=.5;
+function size(){W=cv.width=cv.offsetWidth*devicePixelRatio;H=cv.height=cv.offsetHeight*devicePixelRatio;}
+size();addEventListener('resize',size);
+addEventListener('mousemove',e=>{mx=e.clientX/innerWidth;my=e.clientY/innerHeight;});
+const THREADS=26;
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  for(let i=0;i<THREADS;i++){
+    const p=i/THREADS;
+    const isC = i%9===0;
+    ctx.beginPath();
+    ctx.strokeStyle = isC ? 'rgba(166,48,31,.5)' : `rgba(237,233,223,${.04+.10*Math.sin(p*Math.PI)})`;
+    ctx.lineWidth = (isC?1.3:0.8)*devicePixelRatio;
+    const yBase = H*(0.12+p*0.8);
+    for(let x=0;x<=W;x+=W/90){
+      const n = Math.sin(x*0.0016/devicePixelRatio + t*0.7 + i*0.55)
+              + Math.sin(x*0.0007/devicePixelRatio - t*0.35 + i*1.3)*0.6;
+      const mInf = (my-0.5)*90*Math.sin(p*Math.PI) + (mx-0.5)*40*Math.cos(i);
+      const y = yBase + n*26*devicePixelRatio + mInf*devicePixelRatio;
+      x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+    }
+    ctx.stroke();
+  }
+  t+=0.008;
+  if(!reduce) requestAnimationFrame(draw);
+}
+draw();
+
+/* ---------- marquee duplicate ---------- */
+const mq=document.getElementById('mq');mq.innerHTML+=mq.innerHTML;
+
+/* ---------- word-by-word manifesto ---------- */
+const mani=document.getElementById('mani');
+mani.innerHTML=mani.innerHTML.split(/(<span class="hl">.*?<\/span>|\s+)/g).map(part=>{
+  if(!part.trim())return part;
+  if(part.startsWith('<span'))return `<span class="w">${part}</span>`;
+  return `<span class="w">${part}</span>`;
+}).join(' ');
+const words=[...mani.querySelectorAll('.w')];
+const mo=new IntersectionObserver(es=>{es.forEach(e=>{
+  if(e.isIntersecting){words.forEach((w,i)=>setTimeout(()=>w.classList.add('in'),i*38));mo.disconnect();}
+})},{threshold:.35});
+mo.observe(mani);
+
+/* ---------- reveals ---------- */
+const ro=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){e.target.classList.add('in');ro.unobserve(e.target);}
+}),{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+/* ---------- cursor ---------- */
+const cur=document.getElementById('cursor');
+addEventListener('mousemove',e=>{cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px';});
+document.querySelectorAll('a,[data-hover]').forEach(el=>{
+  el.addEventListener('mouseenter',()=>cur.classList.add('grow'));
+  el.addEventListener('mouseleave',()=>cur.classList.remove('grow'));
+});
+</script>
 </body>
 </html>
