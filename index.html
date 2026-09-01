@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BURSALAW — Hukuk, iplik iplik örülür.</title>
 <meta name="description" content="Bursa merkezli butik hukuk bürosu. Fikri mülkiyet, iş hukuku, ticaret hukuku ve dava takibi.">
+<link rel="canonical" href="https://bursalaw.com/">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:type" content="website">
+<meta property="og:title" content="BURSALAW — Hukuk, iplik iplik örülür.">
+<meta property="og:description" content="Bursa merkezli butik hukuk bürosu. Fikri mülkiyet, iş hukuku, ticaret hukuku ve dava takibi.">
+<meta property="og:url" content="https://bursalaw.com/">
+<meta property="og:site_name" content="BURSALAW">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=Manrope:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -179,6 +186,21 @@ nav ul a:hover{opacity:1}
 @media(max-width:760px){.slides,.slides-head{padding-left:1.4rem;padding-right:1.4rem}}
 
 /* ---------- light band / approach ---------- */
+.notes{padding:10rem 3rem;max-width:1240px;margin:0 auto}
+.notes-head{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;margin-bottom:3rem}
+.notes-head span{font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:var(--silk-dim)}
+.notes-head h3{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(2.2rem,5vw,4.5rem);margin-top:1rem;letter-spacing:-.02em}
+.notes-head>a{font-family:'IBM Plex Mono',monospace;font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;border-bottom:1px solid var(--crimson);padding-bottom:.4rem}
+.notes-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.note-card{min-height:350px;padding:2rem;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;flex-direction:column;transition:background .3s var(--ease)}
+.note-card:hover{background:var(--ink-soft)}
+.note-card .n{font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:.2em;color:var(--crimson)}
+.note-card h4{font-family:'Fraunces',serif;font-weight:400;font-size:1.8rem;line-height:1.12;margin:3rem 0 1.2rem}
+.note-card p{color:var(--silk-dim);font-size:.9rem;line-height:1.7}
+.note-card b{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;font-weight:500;margin-top:auto;padding-top:2rem}
+@media(max-width:900px){.notes-grid{grid-template-columns:1fr}.note-card{min-height:280px}}
+@media(max-width:760px){.notes{padding:7rem 1.4rem}.notes-head{display:block}.notes-head>a{display:inline-block;margin-top:1.5rem}}
+
 .light{
   background:var(--silk);color:var(--ink);
   padding:10rem 3rem;
@@ -241,9 +263,10 @@ nav ul a:hover{opacity:1}
 <div class="cursor" id="cursor"></div>
 
 <nav>
-  <div class="logo"><span>BURSA</span><span style="color:#b3402f">LAW</span></div>
+  <a class="logo" href="/" aria-label="BURSALAW ana sayfa"><span>BURSA</span><span style="color:#b3402f">LAW</span></a>
   <ul>
     <li><a href="#alanlar" data-hover>Alanlar</a></li>
+    <li><a href="/blog/" data-hover>Bilgi Notları</a></li>
     <li><a href="#yaklasim" data-hover>Yaklaşım</a></li>
     <li><a href="#iletisim" data-hover>İletişim</a></li>
   </ul>
@@ -316,6 +339,33 @@ nav ul a:hover{opacity:1}
       </div>
       <ul><li>KVKK Uyum</li><li>Yazılım Sözleşmeleri</li><li>AI &amp; Veri</li></ul>
     </article>
+  </div>
+</section>
+
+<section class="notes" aria-labelledby="notes-title">
+  <div class="notes-head">
+    <div><span>Güncel hukuk yazıları</span><h3 id="notes-title" class="reveal">Bilgi Notları</h3></div>
+    <a href="/blog/" data-hover>Tüm yazıları incele →</a>
+  </div>
+  <div class="notes-grid">
+    <a class="note-card reveal" href="/miras-hukuku/reddi-miras-nasil-yapilir/" data-hover>
+      <span class="n">01 · Miras Hukuku</span>
+      <h4>Reddi miras nasıl yapılır?</h4>
+      <p>Üç aylık süre, görevli mahkeme, kabul sayılabilecek işlemler ve hükmen ret ayrımı.</p>
+      <b>Yazıyı oku →</b>
+    </a>
+    <a class="note-card reveal" href="/miras-hukuku/mirastan-mal-kacirma-muris-muvazaasi/" data-hover>
+      <span class="n">02 · Miras Hukuku</span>
+      <h4>Mirastan mal kaçırma nasıl ispatlanır?</h4>
+      <p>Muris muvazaasının şartları, delilleri, görevli mahkeme ve güncel kararlar.</p>
+      <b>Yazıyı oku →</b>
+    </a>
+    <a class="note-card reveal" href="/miras-hukuku/sakli-pay-tenkis-davasi/" data-hover>
+      <span class="n">03 · Miras Hukuku</span>
+      <h4>Saklı pay ve tenkis davası</h4>
+      <p>Pay hesabı, bir ve on yıllık süreler ile uygulamada dikkat edilmesi gereken noktalar.</p>
+      <b>Yazıyı oku →</b>
+    </a>
   </div>
 </section>
 
