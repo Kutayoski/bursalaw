@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "statuses": [
+    "Fikir",
+    "Araştırma",
+    "Taslak",
+    "Hukuki İnceleme",
+    "Onaylandı",
+    "Yayında"
+  ],
+  "publishable_statuses": ["Onaylandı", "Yayında"],
+  "minimum_word_count": 900,
+  "minimum_verified_decisions": 3,
+  "required_frontmatter": [
+    "sistem_surumu",
+    "seo_basligi",
+    "meta_aciklamasi",
+    "onerilen_url",
+    "birincil_anahtar_kelime",
+    "son_hukuki_kontrol",
+    "yayin_tarihi",
+    "hukuk_alani",
+    "yayin_durumu",
+    "hukuki_inceleyen"
+  ],
+  "required_sections": [
+    "Kararların Soruya Verdiği Net Cevap",
+    "Kaynakça"
+  ],
+  "official_source_domains": [
+    "mevzuat.gov.tr",
+    "resmigazete.gov.tr",
+    "anayasa.gov.tr",
+    "yargitay.gov.tr",
+    "danistay.gov.tr",
+    "adalet.gov.tr",
+    "kvkk.gov.tr",
+    "rekabet.gov.tr",
+    "ticaret.gov.tr",
+    "gelirler.gov.tr",
+    "gib.gov.tr",
+    "sgk.gov.tr"
+  ],
+  "advertising_risk_phrases": [
+    "en iyi avukat",
+    "uzman avukat",
+    "kesin kazanır",
+    "kazanma garantisi",
+    "garantili sonuç"
+  ],
+  "forbidden_characters": ["â", "Â", "î", "Î", "û", "Û"]
+}
+
