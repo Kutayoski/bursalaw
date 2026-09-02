@@ -68,6 +68,8 @@ class Article:
     path: str
     keyword: str
     checked: str
+    published: str
+    area: str
     order: int
 
     @property
@@ -99,6 +101,8 @@ def load_articles() -> list[Article]:
             path=path,
             keyword=str(meta.get("birincil_anahtar_kelime", "Miras hukuku")),
             checked=str(meta.get("son_hukuki_kontrol", "1 Eylül 2026")),
+            published=str(meta.get("yayin_tarihi", "2026-09-01")),
+            area=str(meta.get("hukuk_alani", "Miras Hukuku")),
             order=int(order_match.group(1)) if order_match else 999,
         ))
     return articles
@@ -182,7 +186,7 @@ def render_markdown(article: Article, articles: list[Article]) -> tuple[str, lis
         items: list[str] = []
         for _, raw in list_items:
             item_html = inline(raw)
-            if slugify(current_h2) == "ic-baglanti-onerileri":
+            if slugify(current_h2) in {"ic-baglanti-onerileri", "ilgili-yazilara-ic-baglanti-onerileri"}:
                 target = resolve_related(re.sub(r"^[“\"]|[”\"]$", "", raw), articles)
                 if target and target.path != article.path:
                     display = raw.strip().replace("“", "").replace("”", "").replace('"', "")
@@ -265,7 +269,8 @@ def page_head(title: str, description: str, canonical: str, kind: str = "website
 def render_article(article: Article, articles: list[Article]) -> str:
     body, toc, faqs = render_markdown(article, articles)
     toc_html = "".join(f'<li class="level-{level}"><a href="#{anchor}">{html.escape(title)}</a></li>' for level, title, anchor in toc if level == 2)
-    related_pool = [a for a in articles if a.path != article.path]
+    same_area = [a for a in articles if a.path != article.path and a.area == article.area]
+    related_pool = same_area or [a for a in articles if a.path != article.path]
     related = sorted(related_pool, key=lambda a: abs(a.order - article.order))[:3]
     related_html = "".join(f'<a class="related-card" href="{a.path}/"><span>{a.order:02d}</span><h3>{html.escape(a.title)}</h3><p>Yazıyı oku →</p></a>' for a in related)
     schemas = [
@@ -273,7 +278,7 @@ def render_article(article: Article, articles: list[Article]) -> str:
             "@context": "https://schema.org", "@type": "Article",
             "headline": str(article.meta.get("seo_basligi", article.title)),
             "description": article.description, "inLanguage": "tr-TR",
-            "datePublished": "2026-09-01", "dateModified": "2026-09-01",
+            "datePublished": article.published, "dateModified": article.published,
             "mainEntityOfPage": article.canonical,
             "author": {"@type": "Organization", "name": "BURSALAW"},
             "publisher": {"@type": "Organization", "name": "BURSALAW", "url": SITE_URL},
@@ -301,7 +306,7 @@ def render_article(article: Article, articles: list[Article]) -> str:
 <header class="article-hero">
   <div class="thread-field" aria-hidden="true"></div>
   <div class="hero-inner">
-    <a class="breadcrumb" href="/blog/">Bilgi Notları / Miras Hukuku</a>
+    <a class="breadcrumb" href="/blog/">Bilgi Notları / {html.escape(article.area)}</a>
     <h1>{html.escape(article.title)}</h1>
     <p>{html.escape(article.description)}</p>
     <div class="article-meta"><span>Son hukuki kontrol: {html.escape(article.checked)}</span><span>Yaklaşık {max(4, len(re.findall(r'\w+', article.markdown)) // 210)} dakika okuma</span></div>
@@ -321,15 +326,16 @@ def render_article(article: Article, articles: list[Article]) -> str:
 
 
 def render_index(articles: list[Article]) -> str:
+    index_articles = sorted(articles, key=lambda a: (a.published, -a.order), reverse=True)
     cards = "".join(f'''<article class="blog-card" data-search="{html.escape((a.title + ' ' + a.keyword).casefold(), quote=True)}">
   <a href="{a.path}/">
-    <div class="card-top"><span>{a.order:02d}</span><span>Miras Hukuku</span></div>
+    <div class="card-top"><span>{a.order:02d}</span><span>{html.escape(a.area)}</span></div>
     <h2>{html.escape(a.title)}</h2>
     <p>{html.escape(a.description)}</p>
     <div class="card-bottom"><span>{html.escape(a.checked)}</span><b>Oku →</b></div>
   </a>
-</article>''' for a in articles)
-    desc = "Miras hukuku hakkında güncel mevzuat ve doğrulanmış yargı kararlarıyla hazırlanan BURSALAW bilgi notları."
+</article>''' for a in index_articles)
+    desc = "Türkiye'de farklı hukuk alanları hakkında güncel mevzuat ve doğrulanmış kararlarla hazırlanan BURSALAW bilgi notları."
     schema = [{"@context": "https://schema.org", "@type": "CollectionPage", "name": "BURSALAW Bilgi Notları", "url": f"{SITE_URL}/blog/", "inLanguage": "tr-TR"}]
     return f'''<!DOCTYPE html>
 <html lang="tr">
@@ -344,7 +350,7 @@ def render_index(articles: list[Article]) -> str:
   <div class="hero-inner"><span class="eyebrow">Hukuki Bilgi · Güncel İçtihat</span><h1>Bilgi<br><em>notları.</em></h1><p>Soruyu geciktirmeden cevaplayan; mevzuat, süre ve kararları birlikte ele alan hukuk yazıları.</p></div>
 </header>
 <main class="blog-main" id="yazilar">
-  <div class="blog-tools"><div><span class="eyebrow">Miras Hukuku</span><h2>20 güncel yazı</h2></div><label><span class="sr-only">Yazılarda ara</span><input id="blog-search" type="search" placeholder="Konu ara…" autocomplete="off"></label></div>
+  <div class="blog-tools"><div><span class="eyebrow">Miras Hukuku · KVKK</span><h2>{len(articles)} güncel yazı</h2></div><label><span class="sr-only">Yazılarda ara</span><input id="blog-search" type="search" placeholder="Konu ara…" autocomplete="off"></label></div>
   <div class="blog-grid" id="blog-grid">{cards}</div>
   <p class="no-results" id="no-results" hidden>Bu aramayla eşleşen yazı bulunamadı.</p>
 </main>
@@ -364,7 +370,7 @@ def write_outputs(articles: list[Article]) -> None:
 
     urls = [f"{SITE_URL}/", f"{SITE_URL}/blog/"] + [article.canonical for article in articles]
     sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "\n".join(
-        f"  <url><loc>{html.escape(url)}</loc><lastmod>{date(2026, 9, 1).isoformat()}</lastmod></url>" for url in urls
+        f"  <url><loc>{html.escape(url)}</loc><lastmod>{date(2026, 9, 2).isoformat()}</lastmod></url>" for url in urls
     ) + "\n</urlset>\n"
     (ROOT / "sitemap.xml").write_text(sitemap, encoding="utf-8")
     (ROOT / "robots.txt").write_text(f"User-agent: *\nAllow: /\n\nSitemap: {SITE_URL}/sitemap.xml\n", encoding="utf-8")
@@ -372,7 +378,7 @@ def write_outputs(articles: list[Article]) -> None:
 
 if __name__ == "__main__":
     items = load_articles()
-    if len(items) != 20:
-        raise SystemExit(f"20 yazı bekleniyordu, {len(items)} bulundu.")
+    if len(items) < 20:
+        raise SystemExit(f"En az 20 yazı bekleniyordu, {len(items)} bulundu.")
     write_outputs(items)
     print(f"{len(items)} yazı ve blog ana sayfası üretildi.")
