@@ -350,7 +350,7 @@ def render_index(articles: list[Article]) -> str:
   <div class="hero-inner"><span class="eyebrow">Hukuki Bilgi · Güncel İçtihat</span><h1>Bilgi<br><em>notları.</em></h1><p>Soruyu geciktirmeden cevaplayan; mevzuat, süre ve kararları birlikte ele alan hukuk yazıları.</p></div>
 </header>
 <main class="blog-main" id="yazilar">
-  <div class="blog-tools"><div><span class="eyebrow">Miras Hukuku · KVKK</span><h2>{len(articles)} güncel yazı</h2></div><label><span class="sr-only">Yazılarda ara</span><input id="blog-search" type="search" placeholder="Konu ara…" autocomplete="off"></label></div>
+  <div class="blog-tools"><div><span class="eyebrow">Miras Hukuku · KVKK · İcra Hukuku</span><h2>{len(articles)} güncel yazı</h2></div><label><span class="sr-only">Yazılarda ara</span><input id="blog-search" type="search" placeholder="Konu ara…" autocomplete="off"></label></div>
   <div class="blog-grid" id="blog-grid">{cards}</div>
   <p class="no-results" id="no-results" hidden>Bu aramayla eşleşen yazı bulunamadı.</p>
 </main>
@@ -370,7 +370,7 @@ def write_outputs(articles: list[Article]) -> None:
 
     urls = [f"{SITE_URL}/", f"{SITE_URL}/blog/"] + [article.canonical for article in articles]
     sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "\n".join(
-        f"  <url><loc>{html.escape(url)}</loc><lastmod>{date(2026, 9, 2).isoformat()}</lastmod></url>" for url in urls
+        f"  <url><loc>{html.escape(url)}</loc><lastmod>{date(2026, 9, 3).isoformat()}</lastmod></url>" for url in urls
     ) + "\n</urlset>\n"
     (ROOT / "sitemap.xml").write_text(sitemap, encoding="utf-8")
     (ROOT / "robots.txt").write_text(f"User-agent: *\nAllow: /\n\nSitemap: {SITE_URL}/sitemap.xml\n", encoding="utf-8")
