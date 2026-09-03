@@ -9,7 +9,6 @@ import json
 import re
 import unicodedata
 from dataclasses import dataclass
-from datetime import date
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -58,6 +57,58 @@ def parse_frontmatter(text: str) -> tuple[dict, str]:
     return data, body.strip()
 
 
+def parse_legacy_metadata(text: str) -> tuple[dict, str]:
+    """Read the labelled metadata used by the newer KVKK draft files."""
+    labels = {
+        "SEO başlığı": "seo_basligi",
+        "Meta açıklaması": "meta_aciklamasi",
+        "Önerilen URL": "onerilen_url",
+        "Birincil anahtar kelime": "birincil_anahtar_kelime",
+        "İkincil sorgular": "ikincil_sorgular",
+    }
+    data: dict[str, object] = {}
+    body_lines: list[str] = []
+    for line in text.splitlines():
+        matched = False
+        for label, key in labels.items():
+            prefix = f"{label}:"
+            if line.startswith(prefix):
+                value = line[len(prefix):].strip()
+                data[key] = [part.strip() for part in value.split(";") if part.strip()] if key == "ikincil_sorgular" else value
+                matched = True
+                break
+        if not matched:
+            body_lines.append(line)
+
+    checked = re.search(r"^Son hukuki kontrol tarihi:\s*(.+)$", text, re.MULTILINE)
+    checked_label = checked.group(1).strip() if checked else "2 Eylül 2026"
+    month_numbers = {
+        "Ocak": "01", "Şubat": "02", "Mart": "03", "Nisan": "04",
+        "Mayıs": "05", "Haziran": "06", "Temmuz": "07", "Ağustos": "08",
+        "Eylül": "09", "Ekim": "10", "Kasım": "11", "Aralık": "12",
+    }
+    date_match = re.fullmatch(r"(\d{1,2})\s+(\S+)\s+(\d{4})", checked_label)
+    if date_match and date_match.group(2) in month_numbers:
+        published = f"{date_match.group(3)}-{month_numbers[date_match.group(2)]}-{int(date_match.group(1)):02d}"
+    else:
+        published = "2026-09-02"
+
+    article_path = str(data.get("onerilen_url", ""))
+    if article_path.startswith("/icra-hukuku/"):
+        area = "İcra Hukuku"
+    elif article_path.startswith("/kvkk/"):
+        area = "KVKK"
+    else:
+        area = "Hukuk"
+    data.update({
+        "son_hukuki_kontrol": checked_label,
+        "yayin_tarihi": published,
+        "hukuk_alani": area,
+        "yayin_durumu": "Yayında",
+    })
+    return data, "\n".join(body_lines).strip()
+
+
 @dataclass
 class Article:
     source: Path
@@ -84,7 +135,10 @@ class Article:
 def load_articles() -> list[Article]:
     articles: list[Article] = []
     for source in sorted(CONTENT.glob("[0-9][0-9]-*.md")):
-        meta, body = parse_frontmatter(source.read_text(encoding="utf-8"))
+        raw = source.read_text(encoding="utf-8")
+        meta, body = parse_frontmatter(raw)
+        if not meta:
+            meta, body = parse_legacy_metadata(raw)
         h1 = re.search(r"^#\s+(.+)$", body, re.MULTILINE)
         if not h1:
             raise ValueError(f"H1 bulunamadı: {source}")
@@ -327,6 +381,7 @@ def render_article(article: Article, articles: list[Article]) -> str:
 
 def render_index(articles: list[Article]) -> str:
     index_articles = sorted(articles, key=lambda a: (a.published, -a.order), reverse=True)
+    area_label = " · ".join(dict.fromkeys(article.area for article in index_articles))
     cards = "".join(f'''<article class="blog-card" data-search="{html.escape((a.title + ' ' + a.keyword).casefold(), quote=True)}">
   <a href="{a.path}/">
     <div class="card-top"><span>{a.order:02d}</span><span>{html.escape(a.area)}</span></div>
@@ -350,7 +405,7 @@ def render_index(articles: list[Article]) -> str:
   <div class="hero-inner"><span class="eyebrow">Hukuki Bilgi · Güncel İçtihat</span><h1>Bilgi<br><em>notları.</em></h1><p>Soruyu geciktirmeden cevaplayan; mevzuat, süre ve kararları birlikte ele alan hukuk yazıları.</p></div>
 </header>
 <main class="blog-main" id="yazilar">
-  <div class="blog-tools"><div><span class="eyebrow">Miras Hukuku · KVKK · İcra Hukuku</span><h2>{len(articles)} güncel yazı</h2></div><label><span class="sr-only">Yazılarda ara</span><input id="blog-search" type="search" placeholder="Konu ara…" autocomplete="off"></label></div>
+  <div class="blog-tools"><div><span class="eyebrow">{html.escape(area_label)}</span><h2>{len(articles)} güncel yazı</h2></div><label><span class="sr-only">Yazılarda ara</span><input id="blog-search" type="search" placeholder="Konu ara…" autocomplete="off"></label></div>
   <div class="blog-grid" id="blog-grid">{cards}</div>
   <p class="no-results" id="no-results" hidden>Bu aramayla eşleşen yazı bulunamadı.</p>
 </main>
@@ -368,9 +423,12 @@ def write_outputs(articles: list[Article]) -> None:
         article.output.parent.mkdir(parents=True, exist_ok=True)
         article.output.write_text(render_article(article, articles), encoding="utf-8")
 
-    urls = [f"{SITE_URL}/", f"{SITE_URL}/blog/"] + [article.canonical for article in articles]
+    latest = max(article.published for article in articles)
+    urls = [(f"{SITE_URL}/", latest), (f"{SITE_URL}/blog/", latest)] + [
+        (article.canonical, article.published) for article in articles
+    ]
     sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "\n".join(
-        f"  <url><loc>{html.escape(url)}</loc><lastmod>{date(2026, 9, 3).isoformat()}</lastmod></url>" for url in urls
+        f"  <url><loc>{html.escape(url)}</loc><lastmod>{lastmod}</lastmod></url>" for url, lastmod in urls
     ) + "\n</urlset>\n"
     (ROOT / "sitemap.xml").write_text(sitemap, encoding="utf-8")
     (ROOT / "robots.txt").write_text(f"User-agent: *\nAllow: /\n\nSitemap: {SITE_URL}/sitemap.xml\n", encoding="utf-8")
