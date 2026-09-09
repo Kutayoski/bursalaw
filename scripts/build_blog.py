@@ -134,7 +134,7 @@ class Article:
 
 def load_articles() -> list[Article]:
     articles: list[Article] = []
-    for source in sorted(CONTENT.glob("[0-9][0-9]-*.md")):
+    for source in sorted(CONTENT.glob("[0-9][0-9]*-*.md")):
         raw = source.read_text(encoding="utf-8")
         meta, body = parse_frontmatter(raw)
         if not meta:
